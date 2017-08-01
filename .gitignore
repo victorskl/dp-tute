@@ -1,3 +1,9 @@
+.idea
+*.iml
+
+*.bin
+*.exe
+
 dist
 dist-*
 cabal-dev
