@@ -24,10 +24,41 @@ brew install ghc cabal-install
 
 - Otherwise, install [official Windows Installer](https://www.haskell.org/platform/) for native Windows development.
 
-## Cabal
+### Cabal
 Cabal [doc is here](https://www.haskell.org/cabal/) and [how to install Cabal package](https://wiki.haskell.org/Cabal-Install) and packages can be found on [Hackage](http://hackage.haskell.org/). For example, [parallel library](http://hackage.haskell.org/packages/search?terms=parallel) that use in `hello`.
 
 ```
 cabal update
 cabal install parallel
 ```
+
+### Compiling and Interpreter
+
+To compile:
+
+```
+ghc -o my_program.exe my_program.hs
+./my_program.exe
+```
+
+To start GHC interpreter:
+
+```
+ghci
+Prelude> :load my_program.hs
+Main> :t my_program
+Main> my_program arg1 arg2
+Main> :?
+Main> :q
+```
+
+Or directly work inside GHC interpreter:
+
+```
+ghci
+Prelude> let fac n = if n == 0 then 1 else n * fac (n-1)
+Prelude> fac 42
+1405006117752879898543142606244511569936384000000000
+```
+
+The [`hello`](hello) folder follow [Haskell in 5 steps](https://wiki.haskell.org/Haskell_in_5_steps) tutorial.

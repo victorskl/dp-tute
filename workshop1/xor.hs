@@ -1,1 +1,0 @@
-xor: Bool -> Bool -> Bool
