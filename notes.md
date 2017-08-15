@@ -54,6 +54,8 @@
 
 ## Section 02 - Builtin Types
 
+- **video cue: 20170801**
+
 - Type system
     - strong, safe and static
     - _strong_ means no loopholes; one cannot tell Haskell to e.g. consider an integer to be a pointer as one can tell in C with `(char *) 42`
@@ -143,12 +145,22 @@
               In the expression: [1, True]
               In an equation for ‘it’: it = [1, True]
         ```
-- If-the-else, Guards and structured definition
-    - If-then-else in Haskell differs from if-then-elses in imperative languages in that
-        - the else arm is not optional, and
-        - the then and else arms are expressions, not statements.
+- Control
     - Study e.g. [if_guard.hs](lecture/section02/if_guard.hs)
-- Parametric polymorphic e.g. [poly.hs](lecture/section02/poly.hs)
+
+    - **If-the-else**
+        - If-then-else in Haskell differs from if-then-elses in imperative languages in that
+            - the else arm is not optional, and
+            - the then and else arms are expressions, not statements.
+    
+    - **video cue: 20170803**
+    
+    - **Guards**
+    
+    - Structured Definition - aka offside rule
+
+- **Parametric Polymorphic** e.g. [poly.hs](lecture/section02/poly.hs)
+    - **video cue: 20170803 07:09**
     - A version of the code of `len` complete with type declaration
         ```
         len :: [t] -> Int
@@ -159,19 +171,107 @@
     - It means that `len` can process lists of type `t` regardless of what type `t` is, i.e. regardless of what the form of the elements is.
     - The reason why `len` works regardless of the type of the list elements is that it does not do anything with the list elements.
     - This version of `len` shows this in the second pattern: the underscore is a placeholder for a value you want to ignore.
+    - `t` is type constructor - happens at compile time.
 
 ## Section 03 - Defining Types
 
+- **video cue: 20170803 12:20**
+
 - Enumerated type
+    - `data Gender = Male | Female`
+    - type constructor => `Gender`
+        - arity-0 
+        - given zero args, it construct a type
+    - data constructor => `Male, Female`
+    - must start with Upper-case letter
+    - using Booleans
+    - [type_demo.hs](lecture/section03/type_demo.hs)
+    - Card demo
+        - [card.hs](lecture/section03/card.hs)
+        - creating structure (i.e. vs C)
+        - Printing values - use a function that returns a string
+        - Standard (Prelude) string conversion function `show`
+        - [card2.hs](lecture/section03/card2.hs)
+        - Deriving `Show` [card3.hs](lecture/section03/card3.hs)
+        - Eq and Ord [card4.hs](lecture/section03/card4.hs)
+        - Disjunction and Conjunction
+            - Haskell can have both at once
+
+- **video cue: 20170808**
+
 - Discriminated union type
-    - vs Un-discriminated union
+    - can have both disjunction and conjunction at once
+    - ... is called Algebraic Type Systems
+        ```
+        data JokerColor = Red | Black
+        data JCard = NormalCard Suit Rank | JokerCard JokerColor
+        ``` 
+    
+- vs Un-discriminated union 
+    - In C, you could try to represent JCard like this
+        ```C
+        struct normalcard_struct { ... }; 
+        struct jokercard_struct { ... }; 
+        union card_union {
+            struct normalcard_struct normal;
+            struct jokercard_struct joker; 
+        };
+        ```
+    - but you wouldn't know which field of the union is applicable in any given case. 
+    - In Haskell, you do (the data constructor tells you), which is why Haskell's unions are said to be discriminated.
+    - Note that unlike C's union types, C's enumeration types and structure types are special cases of Haskell’s discriminated union types.
+    - Discriminated union types allow programmers to define types that describe exactly what they mean.
+
+- Quiz [library_item.hs](lecture/section03/library_item.hs)
+
+- Maybe type
+    - In Haskell, if a value is optional, you indicate this by using the maybe type defined in the prelude:
+        ```
+        data Maybe t = Nothing | Just t
+        ```
+    - For any type `t`, a value of type `Maybe t` is either `Nothing`, or `Just x`, where `x` is a value of type `t`.
 
 ## Section 04 - Using Types
 
-- representation expression: C vs Java vs Haskell
+- **video cue: 20170808 23:00**
+
+- comparing representation expression: C vs Java vs Haskell
+    - [expr.c](lecture/section04/expr.c) VS [expr.hs](lecture/section04/expr.hs) VS [Expr.java](lecture/section04/Expr.java)
     - errors
     - memory
     - maintenance
-- switching on alternatives
-    - missing alternatives `-fwarn-incomplete-patterns`
-    - the consequences of missing alternatives
+    
+- switching on alternatives (i.e. switch...case...)
+    - [switching.hs](lecture/section04/switching.hs)
+
+- missing alternatives `-fwarn-incomplete-patterns`
+
+- the consequences of missing alternatives
+
+- **video cue: 20170810**
+
+- Binary Search Tree
+    - [bst.c](lecture/section04/bst.c)
+    - [bst.hs](lecture/section04/bst.hs) | [bst_my.hs](lecture/section04/bst_my.hs)
+    - Quiz: Maybe tree
+    - How would you represent "maybe a tree, maybe nothing" in Haskell?
+    ```
+    Maybe Tree
+    ```
+    - How would you represent "maybe a tree, maybe nothing" in C?
+    - You can have a null pointer meaning "there is no tree", you can have a null pointer meaning "there is a tree, and it is empty", but it cannot mean both at once.
+    - You need something like `BST *maybe_tree` (which means that `maybe_tree` is a pointer to a pointer to a `bst_struct`) with
+        - `maybe_tree == NULL` meaning there is no tree and
+        - `maybe_tree != NULL && *maybe_tree == NULL` meaning there is a tree, and it is empty
+    - Pattern matching Vs Pointer Dereferencing          
+
+- Data structure vs code structure
+
+
+## Section 05 - Adapting to DP
+
+- **video cue 20170810 00:27:00**
+
+- recursion Vs iteration
+    - no loop
+
