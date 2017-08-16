@@ -61,4 +61,15 @@ Prelude> fac 42
 1405006117752879898543142606244511569936384000000000
 ```
 
-The [`hello`](hello) folder follow [Haskell in 5 steps](https://wiki.haskell.org/Haskell_in_5_steps) tutorial.
+### Kick Start
+
+- Go through this before starting lectures and workshops.
+
+- The [`hello`](hello) folder follow [Haskell in 5 steps](https://wiki.haskell.org/Haskell_in_5_steps) tutorial.
+
+- [Learn_Haskell_in_10_minutes](https://wiki.haskell.org/Learn_Haskell_in_10_minutes)
+
+- http://learnyouahaskell.com/syntax-in-functions
+
+- http://learnyouahaskell.com/types-and-typeclasses#typeclasses-101
+
