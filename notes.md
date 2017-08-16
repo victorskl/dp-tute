@@ -272,6 +272,39 @@
 
 - **video cue 20170810 00:27:00**
 
-- recursion Vs iteration
+- Recursion Vs Iteration
     - no loop
+
+- Reliability
+- Productivity
+- Efficiency
+    - Efficiency in General
+
+- Quiz: List insertion
+    - Write a type declaration for a Haskell function to insert an element into a sorted list of Ints. Then define the function.
+
+    ```
+    insert :: [Int] -> Int -> [Int]
+    insert [] t = [t]
+    insert (x:xs) t
+        | x < t = (x:insert xs t) -- parentheses is optional
+        | otherwise = t:x:xs
+    
+    -- another
+    listInsert :: Int -> [Int] -> [Int]
+    listInsert elt [] = [elt]
+    listInsert elt (e:es)
+        | e < elt = e:listInsert elt es
+        | otherwise = elt:e:es
+    ```  
+- Immutable data structures
+
+- Updating a BST
+    - insert a Node into Tree
+    
+- Reusing memory
+
+- Memory efficiency
+
+- Converting a list of pairs to a BST
 
